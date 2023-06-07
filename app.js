@@ -1,7 +1,7 @@
 var quesArray = [
     {
         num: 1,
-        question: "Q1 : HTML Stand for?",
+        question: "HTML Stand for?",
         Option: {
             a: "Hyper text markup Language",
             b: "Hyper text programming Language",
@@ -13,7 +13,7 @@ var quesArray = [
     },
     {
         num: 2,
-        question: "Q2 : Which type of JavaScript Languages is?",
+        question: "Which type of JavaScript Languages is?",
         Option: {
             a: "Object-Oriented ",
             b: "Object-Base",
@@ -25,7 +25,7 @@ var quesArray = [
     },
     {
         num: 3,
-        question: "Q3 : The 'function' and  'var' are known as?",
+        question: "The 'function' and  'var' are known as?",
         Option: {
             a: "Keywords",
             b: "Data types",
@@ -38,7 +38,7 @@ var quesArray = [
     ,
     {
         num: 4,
-        question: "Q4 : who is the present president of pakistan?",
+        question: "who is the present president of pakistan?",
         Option: {
             a: "Arif Alvi",
             b: "Imran Khan",
@@ -51,7 +51,7 @@ var quesArray = [
     ,
     {
         num: 5,
-        question: "Q5 : How many prayers in a day?",
+        question: "How many prayers in a day?",
         Option: {
             a: "6",
             b: "5",
@@ -71,21 +71,27 @@ var Ques = document.getElementById("Ques")
 var opt = document.getElementById("opt").children;
 // console.log(opt)
 
-var nextQuesBtn = document.getElementById("nextQuesBtn")
+var nextQuesBtn = document.getElementById("nextQuesBtn");
 
-var resultsSection = document.querySelector(".resultsSection")
-var quizSection = document.querySelector(".quizSection")
+var resultsSection = document.querySelector(".resultsSection");
+var quizSection = document.querySelector(".quizSection");
 
+var userName = document.getElementById("userName");
+var userEmail = document.getElementById("userEmail");
 
-var userName = document.getElementById("userName")
-var userEmail = document.getElementById("userEmail")
-
-var totalQues = document.getElementById("totalQues")
+var totalQues = document.getElementById("totalQues");
 // console.log(totalQues)
-var correctAns = document.getElementById("correctAns")
-var wrongAns = document.getElementById("wrongAns")
-var totalScore = document.getElementById("totalScore")
+var correctAns = document.getElementById("correctAns");
+var wrongAns = document.getElementById("wrongAns");
+var totalScore = document.getElementById("totalScore");
 var Percentage = document.getElementById("Percentage");
+
+var totalQ = document.getElementById("totalQ");
+totalQ.innerHTML = quesArray.length;
+var countQ = document.getElementById("countQ");
+var passStatement = document.getElementById("passStatement");
+
+var failStatement = document.getElementById("failStatement");
 
 
 for (var li of opt) {
@@ -93,7 +99,8 @@ for (var li of opt) {
     li.removeAttribute("class", "wrongAns")
 }
 
-Ques.innerHTML = quesArray[0].question;
+// Ques.innerHTML = quesArray[0].question;
+Ques.innerHTML = quesArray[0].num + ": " + quesArray[0].question;
 
 opt[0].innerHTML = quesArray[0].Option.a
 opt[1].innerHTML = quesArray[0].Option.b
@@ -104,18 +111,21 @@ opt[3].innerHTML = quesArray[0].Option.d
 
 counter = 0;
 function nextQuestionBtn() {
-    
-    if (counter < quesArray.length -1) {
+
+    if (counter < quesArray.length - 1) {
         counter++;
-        
 
-          Ques.innerHTML = quesArray[counter].question;
+        countQ.innerHTML = counter + 1;
 
-    opt[0].innerHTML = quesArray[counter].Option.a
-    opt[1].innerHTML = quesArray[counter].Option.b
-    opt[2].innerHTML = quesArray[counter].Option.c
-    opt[3].innerHTML = quesArray[counter].Option.d
-    }else{
+        //   Ques.innerHTML = quesArray[counter].question;
+        Ques.innerHTML = quesArray[counter].num + ": " + quesArray[counter].question;
+
+
+        opt[0].innerHTML = quesArray[counter].Option.a
+        opt[1].innerHTML = quesArray[counter].Option.b
+        opt[2].innerHTML = quesArray[counter].Option.c
+        opt[3].innerHTML = quesArray[counter].Option.d
+    } else {
         // nextQuesBtn.innerHTML = "See Result"
         quizSection.style.display = "none"
         resultsSection.style.display = "flex"
@@ -123,20 +133,56 @@ function nextQuestionBtn() {
         correctAns.innerHTML = CorrectAnsCounter;
         wrongAns.innerHTML = WrongAnsCounter
         totalScore.innerHTML = TotalScore;
-        Percentage.innerHTML = percent + "%";
-   }
 
+        Percentage.innerHTML = (CorrectAnsCounter / quesArray.length) * 100 + "%"
+    
+
+
+     
+        // passStatement.innerHTML = passStatement.innerHTML + Percentage.innerHTML;
+        // passStatement.style.display = "block"
+
+        // failStatement.innerHTML = failStatement.innerHTML;
+        // failStatement.style.display = "block"
+        
+
+        // console.log(passStatement.innerHTML)
+        // console.log(failStatement.innerHTML)
+        // // console.log(failStatement.innerHTML)
+        // console.log(Percentage.innerHTML)
+
+
+
+        
+
+    }
+
+
+    // if (Percentage >= 60 && Percentage <=100) {
+    //     passStatement.innerHTML = Percentage;
+    //     passStatement.innerHTML == passStatement.innerHTML + Percentage.innerHTML;
+    //     passStatement.innerHTML.style.display = "block"
+    //     // failStatement.innerHTML.style.display = "none"
+    // } 
+    // else if(Percentage >= 0 && Percentage <= 59){
+    //     failStatement.innerHTML.style.display = "block"
+    //     // passStatement.innerHTML.style.display = "none"
+    //     failStatement.innerHTML = Percentage;
+    //     failStatement.innerHTML == failStatement.innerHTML + Percentage.innerHTML;
+        
+
+    // }
 
     for (var li of opt) {
-                li.classList.remove("liDisable")
-                li.classList.remove("rigthAns")
-                li.classList.remove("wrongAns") 
-                nextQuesBtn.style.display = "none"
-            }
+        li.classList.remove("liDisable")
+        li.classList.remove("rigthAns")
+        li.classList.remove("wrongAns")
+        nextQuesBtn.style.display = "none"
+    }
 
-            
-    
-        
+
+
+
 
 }
 
@@ -149,7 +195,7 @@ var counter = 0;
 var CorrectAnsCounter = 0;
 var WrongAnsCounter = 0;
 var TotalScore = 0;
-// var percent = 
+var percent;
 
 
 
@@ -169,10 +215,10 @@ function formControl() {
 
     }
 
-    var inputUserName = document.getElementById("inputUserName").value  
+    var inputUserName = document.getElementById("inputUserName").value
     var InputUserEmail = document.getElementById("InputUserEmail").value
     userName.innerHTML = inputUserName;
-    userEmail.innerHTML = InputUserEmail; 
+    userEmail.innerHTML = InputUserEmail;
 
 
     formCtrl.style.display = "none"
@@ -191,15 +237,15 @@ function strtQuiz() {
 
 
 
-function selectOpt(element){
+function selectOpt(element) {
     nextQuesBtn.style.display = "block"
 
     if (element.innerHTML === quesArray[counter].answer) {
         element.classList.add("rigthAns")
         CorrectAnsCounter++
         TotalScore = TotalScore + 5
-        // console.log(CorrectAnsCounter)
-        // console.log(TotalScore)
+
+
     } else {
         WrongAnsCounter++
         element.classList.add("wrongAns")
@@ -209,16 +255,16 @@ function selectOpt(element){
                 li.classList.add("rigthAns")
                 break
             }
-    
+
         }
-    
-    
+
+
     }
-    
-    
+
+
     for (var li of opt) {
         li.classList.add("liDisable")
-    
+
     }
 
 

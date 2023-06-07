@@ -135,3 +135,13 @@
     background-color: red;
     color: white;
 }
+
+
+
+#passStatement{
+    display: none;
+}
+
+#failStatement{
+    display: none;
+}
